@@ -1,9 +1,9 @@
-function solution(k, n) {
-  for (let i = 0; i < n; i++) {
-    const last = k.splice(k.length - 1, 1)
-    k = [ ...last, ...k ]
+function solution(source, times) {
+  for (let i = 0; i < times; i++) {
+    const [last, ...others] = source.reverse()
+    source = [ ...[last], ...others.reverse() ]
   }
-  return k
+  return source
 }
 
 module.exports = { solution }
