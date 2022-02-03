@@ -1,49 +1,24 @@
 function solution(n) {
-  const bs = new Number(n).toString(2).split("")
-  let last = null
-  let s = -1
-  let all = [0]
-  for (let i = 0, len = bs.length; i < len; i++) {
-    let actual = bs[i]
-    if (actual === "1") {
-      if (last === null) {
-        last = actual
-        continue
-      }
-      if (last === "1") {
-        last = actual
-        continue
-      }
-      if (last === "0") {
-        last = actual
-        s++
-        all.push(s)
-        s = -1
-        continue
-      }
-    }
-    if (actual === "0") {
-      if (last === null) {
-        last = actual
-        continue
-      }
-      if (last === "0") {
-        last = actual
-        if (i + 1 === len) {
-          s = 0
-        } else {
-          s++
+  if (Number.isInteger(n)) {
+    const MIN = 1
+    const MAX = 2147483647
+    if (n >= MIN && n <= MAX) {
+      const bin = new Number(n).toString(2)
+      let last = 0
+      let next = 0
+      let gt = result = 0
+      while (true) {
+        next = bin.indexOf("1", next + 1)
+        if (next === -1) return gt
+        result = next - (last + 1)
+        if (result > gt) {
+          gt = result
         }
-        continue
-      }
-      if (last === "1") {
-        last = actual
-        s++
-        continue
+        last = next
       }
     }
   }
-  return all.reduce(function(a, b) { return Math.max(a, b) })
+  return 0
 }
 
 module.exports = { solution }
