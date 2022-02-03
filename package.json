@@ -4,5 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "jest": "^27.4.7"
   }
 }
