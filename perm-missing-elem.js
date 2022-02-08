@@ -7,10 +7,14 @@ function solution(a) {
   if (a.length > MAX) {
     return 0
   }
-  return [ ...a ]
-    .sort((x, y) => x - y)
-    .map((e, i) => [e, i + 1])
-    .filter((e) => e[0] !== e[1])[0][1]
+  let l = a.length
+  let t = l + 1
+  let p = 0
+  for (let i = 0; i < l; i++) {
+    p += a[i]
+    t += i + 1
+  }
+  return t - p
 }
 
 module.exports = { solution }
