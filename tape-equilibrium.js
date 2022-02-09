@@ -1,31 +1,31 @@
-function solution(a) {
+function solution(tape) {
   const MIN_RANGE = 2
   const MAX_RANGE = 100000
-  if (!Array.isArray(a)) {
+  if (!Array.isArray(tape)) {
     return -1
   }
-  if (a.length < MIN_RANGE || a.length > MAX_RANGE) {
+  if (tape.length < MIN_RANGE || tape.length > MAX_RANGE) {
     return -1
   }
   let current = null
-  for (let i = 0, l = a.length - 1; i < l; i++) {
-    const position = i + 1
-    const reducer = (x, y) => {
-      if (x > 1000 || x < -1000 || y > 1000 || y < -1000) {
-        throw new Error("Number out of range")
-      }
-      return x + y
+  let left = 0
+  let right = 0
+  for (let i = 0, l = tape.length - 1; i < l; i++) {
+    left += tape[i]
+    if (i === 0) {
+      right += [ ...tape ].splice(i + 1).reduce((x, y) => {
+        if (x < -1000 || x > 1000 || y < -1000 || y > 1000) {
+          throw new Error("Number out of range")
+        }
+        return x + y
+      }, 0)
+    } else {
+      right -= tape[i]
     }
-    const former = [ ...a ].splice(0, position)
-    const formerSum = former.reduce(reducer, 0)
-    const latest = [ ...a ].splice(position)
-    const latestSum = latest.reduce(reducer, 0)
-    const actual = Math.abs(formerSum - latestSum)
-    // console.log(i, position, former, latest, formerSum, latestSum, current, actual)
-    if (current === null || (current !== null && current > actual)) {
-      current = actual
+    let sub = Math.abs(Math.abs(left) - Math.abs(right))
+    if (current === null || sub < current) {
+      current = sub
     }
-    // console.log(i, position, former, latest, formerSum, latestSum, current, actual)
   }
   return current
 }
