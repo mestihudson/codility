@@ -14,9 +14,6 @@ function solution(tape) {
     left += tape[i]
     if (i === 0) {
       right += [ ...tape ].splice(i + 1).reduce((x, y) => {
-        if (x < -1000 || x > 1000 || y < -1000 || y > 1000) {
-          throw new Error("Number out of range")
-        }
         return x + y
       }, 0)
     } else {
