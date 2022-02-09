@@ -22,7 +22,7 @@ function solution(tape) {
     } else {
       right -= tape[i]
     }
-    let sub = Math.abs(Math.abs(left) - Math.abs(right))
+    let sub = Math.abs(left - right)
     if (current === null || sub < current) {
       current = sub
     }
