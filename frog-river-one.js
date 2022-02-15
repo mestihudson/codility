@@ -1,6 +1,12 @@
 function solution(moment, leaves) {
-  const setOfLeaves = [ ...new Set([ ...leaves ]) ].sort((x, y) => x - y)
-  return setOfLeaves.length >= moment ? leaves.indexOf(moment) : -1
+  let setOfLeaves = new Set()
+  for (let i = 0; i < leaves.length; i++) {
+    setOfLeaves.add(leaves[i])
+    if (setOfLeaves.size === moment) {
+      return i
+    }
+  }
+  return -1
 }
 
 module.exports = { solution }
